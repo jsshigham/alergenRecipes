@@ -1,6 +1,7 @@
 import React from "react";
+import Link from "next/link";
 
-function SearchTiles({ recipe, key, handleButtonClick }) {
+function SearchTiles({ recipe, key,}) {
   return (
     <div
       key={key}
@@ -70,10 +71,10 @@ function SearchTiles({ recipe, key, handleButtonClick }) {
           }
         })}
       </div>
-      <button onClick={handleButtonClick} className="bg-white text-red-950 rounded font-mono p-1 text-center hover:bg-red-950 hover:text-white">More Infomation</button>
-      <a href="/RecipePage" className="bg-white text-red-950 rounded font-mono p-1 text-center hover:bg-red-950 hover:text-white">
+      <Link href="/recipepage" className="bg-white text-red-950 rounded font-mono p-1 text-center hover:bg-red-950 hover:text-white">
         More Infomation
-      </a>
+      </Link>
+      
     </div>
   );
 }
