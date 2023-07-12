@@ -71,7 +71,7 @@ function SearchTiles({ recipe, key,}) {
           }
         })}
       </div>
-      <Link href="/recipepage" className="bg-white text-red-950 rounded font-mono p-1 text-center hover:bg-red-950 hover:text-white">
+      <Link href="../recipes" className="bg-white text-red-950 rounded font-mono p-1 text-center hover:bg-red-950 hover:text-white">
         More Infomation
       </Link>
       
