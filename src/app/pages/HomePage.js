@@ -4,6 +4,7 @@ import SearchTiles from "../components/SearchTiles";
 import SearchForm from "../components/SearchForm";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { useRouter } from 'next/router';
 
 export default function Home() {
   const [recipes, setRecipes] = useState([]);
@@ -17,6 +18,11 @@ export default function Home() {
     'Vegan': false,
     'Vegetarian': false,
   });
+
+  const router = useRouter();
+  const handleButtonClick = () => {
+    router.push('/RecipePage'); 
+  };
 
   const handleKeyDown = (event) => {
     if (event.keyCode === 13) {
@@ -93,7 +99,7 @@ export default function Home() {
         />
         <div className="grid lg:grid-cols-3 gap-5 p-5 md:grid-cols-2 sm:grid-cols-1">
           {filteredRecipes.map((recipe, index) => (
-            <SearchTiles options={options} key={index} recipe={recipe} />
+            <SearchTiles key={index} recipe={recipe} handleButtonClick={handleButtonClick} />
           ))}
         </div>
         <Footer />

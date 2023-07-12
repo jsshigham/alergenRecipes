@@ -1,6 +1,6 @@
 import React from "react";
 
-function SearchTiles({ recipe, key, options }) {
+function SearchTiles({ recipe, key, handleButtonClick }) {
   return (
     <div
       key={key}
@@ -70,6 +70,7 @@ function SearchTiles({ recipe, key, options }) {
           }
         })}
       </div>
+      <button onClick={handleButtonClick} className="bg-white text-red-950 rounded font-mono p-1 text-center hover:bg-red-950 hover:text-white">More Infomation</button>
       <a href="/RecipePage" className="bg-white text-red-950 rounded font-mono p-1 text-center hover:bg-red-950 hover:text-white">
         More Infomation
       </a>
