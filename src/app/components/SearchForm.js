@@ -3,7 +3,8 @@ const SearchForm = ({
   setSearchValue,
   handleSearch,
   setOptions,
-  options
+  options,
+  handleKeyDown,
 }) => {
   const handleCheckboxChange = (e) => {
     const { name, checked } = e.target;
@@ -15,7 +16,8 @@ const SearchForm = ({
   };
 
   return (
-    <div className="bg-red-300 flex rounded gap-2 justify-center py-5">
+    <div className="bg-red-300 flex flex-col gap-2 justify-center items-center py-5">
+    <p>Search for a food, specific or general, then tailor the options to meet your dietary requirements.</p>
       <form
         action=""
         className="flex flex-col rounded gap-2 items-center justify-center py-5"
@@ -24,7 +26,9 @@ const SearchForm = ({
           className="rounded px-2 w-48 text-center"
           type="text"
           value={searchValue}
+          placeholder='Search'
           onChange={(e) => setSearchValue(e.target.value)}
+          onKeyDown={handleKeyDown}
         />
         <div className="flex gap-2">
           <label className="inline-flex items-center">
@@ -81,7 +85,7 @@ const SearchForm = ({
         </div>
         <button
           type="button"
-          className="bg-red-950 text-white rounded px-2 font-mono w-min"
+          className="bg-red-950 text-white rounded px-2 font-mono w-min hover:bg-red-400 hover:text-black"
           onClick={handleSearch}
         >
           Search

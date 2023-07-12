@@ -1,10 +1,10 @@
 import React from "react";
 
 function SearchTiles({ recipe, key, options }) {
-    return (
+  return (
     <div
       key={key}
-      className="bg-red-950 text-white rounded flex flex-col items-center justify-start pb-2"
+      className="bg-red-950 text-white rounded flex flex-col items-center justify-start pb-2 hover:bg-red-400 hover:text-black"
     >
       <h2 className="py-2 font-mono ">{recipe.recipe.label}</h2>
       <img
@@ -70,7 +70,9 @@ function SearchTiles({ recipe, key, options }) {
           }
         })}
       </div>
-      <a className="bg-white text-red-950 rounded font-mono p-1 text-center">More Infomation</a>
+      <a href="/RecipePage" className="bg-white text-red-950 rounded font-mono p-1 text-center hover:bg-red-950 hover:text-white">
+        More Infomation
+      </a>
     </div>
   );
 }
