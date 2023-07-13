@@ -18,6 +18,9 @@ export default function Home() {
     'Vegetarian': false,
   });
 
+  const key = process.env.APP_KEY;
+  const id = process.env.APP_ID;
+  console.log(key, id);
 
 
   const handleKeyDown = (event) => {
@@ -34,9 +37,10 @@ export default function Home() {
   useEffect(() => {
     async function getRecipes() {
       const recipes = await axios(
-        `https://api.edamam.com/api/recipes/v2?q=${searchValueFromButtonClick}&app_key=f1ee630273942c466dfa65a1df7f9ad7&app_id=ada97f84&type=any`
+        `https://api.edamam.com/api/recipes/v2?q=${searchValueFromButtonClick}&app_key=${key}&app_id=${id}&type=any`
       );
       setRecipes(recipes.data.hits);
+      console.log(recipes.data.hits)
     }
     getRecipes();
   }, [searchValueFromButtonClick]);
