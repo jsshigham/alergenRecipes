@@ -1,27 +1,28 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import SearchTiles from "../components/SearchTiles";
 import SearchForm from "../components/SearchForm";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import AppContext from "../components/AppContext";
 
 export default function Home() {
-  const [recipes, setRecipes] = useState([]);
-  const [searchValue, setSearchValue] = useState("");
-  const [searchValueFromButtonClick, setSearchValueFromButtonClick] =
-    useState("");
-  const [options, setOptions] = useState({
-    "Dairy-Free": false,
-    "Gluten-Free": false,
-    "Peanut-Free": false,
-    'Vegan': false,
-    'Vegetarian': false,
-  });
+  const {
+    recipes,
+    setRecipes,
+    currentRecipe,
+    setCurrentRecipes,
+    searchValue,
+    setSearchValue,
+    searchValueFromButtonClick,
+    setSearchValueFromButtonClick,
+    options,
+    setOptions,
+  } = useContext(AppContext);
 
-  const key = process.env.APP_KEY;
-  const id = process.env.APP_ID;
+  const key = process.env.NEXT_PUBLIC_APP_KEY;
+  const id = process.env.NEXT_PUBLIC_APP_ID;
   console.log(key, id);
-
 
   const handleKeyDown = (event) => {
     if (event.keyCode === 13) {
@@ -40,7 +41,7 @@ export default function Home() {
         `https://api.edamam.com/api/recipes/v2?q=${searchValueFromButtonClick}&app_key=${key}&app_id=${id}&type=any`
       );
       setRecipes(recipes.data.hits);
-      console.log(recipes.data.hits)
+      console.log(recipes.data.hits);
     }
     getRecipes();
   }, [searchValueFromButtonClick]);
@@ -90,13 +91,7 @@ export default function Home() {
     return (
       <main className="bg-white">
         <Header />
-        <SearchForm
-          searchValue={searchValue}
-          setSearchValue={setSearchValue}
-          handleSearch={handleSearch}
-          setOptions={setOptions}
-          options={options}
-        />
+        <SearchForm handleSearch={handleSearch} handleKeyDown={handleKeyDown} />
         <div className="grid lg:grid-cols-3 gap-5 p-5 md:grid-cols-2 sm:grid-cols-1">
           {filteredRecipes.map((recipe, index) => (
             <SearchTiles key={index} recipe={recipe} />
