@@ -20,7 +20,7 @@ function SearchTiles({ recipe }) {
       />
 
       <p>Health Labels:</p>
-      <div className="grid grid-cols-2 gap-2">
+      <div className="flex flex-wrap justify-center items-center gap-2">
         {recipe.recipe.healthLabels.map((label, index) => {
           switch (label) {
             case "Gluten-Free":
