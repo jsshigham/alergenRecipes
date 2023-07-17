@@ -10,6 +10,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function RootLayout({ children }) {
   
+  const [favorites, setFavorites] = useState([]);
   const [recipes, setRecipes] = useState([]);
   const [currentRecipe, setCurrentRecipe] = useState({});
   const [searchValue, setSearchValue] = useState("");
@@ -26,6 +27,8 @@ export default function RootLayout({ children }) {
   return (
     <AppContext.Provider
       value={{
+        favorites,
+        setFavorites,
         recipes,
         setRecipes,
         currentRecipe,

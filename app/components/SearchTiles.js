@@ -43,7 +43,7 @@ function SearchTiles({ recipe }) {
       </div>
       <button onClick={updateCurrentRecipe}>
         <Link
-          href={`../${recipe.recipe.label.replaceAll(" ", "-")}`}
+          href={`../recipe/${recipe.recipe.label.replaceAll(" ", "-")}`}
           className="bg-white text-red-950 rounded font-mono p-1 text-center hover:bg-red-950 hover:text-white"
         >
           More Information

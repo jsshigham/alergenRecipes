@@ -10,12 +10,12 @@ function Header() {
             Alergen Recipes
           </h1>
         </Link>
-        <button
-          type="button"
+        <Link
+          href={"../favorites"}
           className="rounded p-2 bg-red-300 font-mono hover:bg-red-400 hover:text-white"
         >
           Favorites
-        </button>
+        </Link>
       </div>
     </header>
   );

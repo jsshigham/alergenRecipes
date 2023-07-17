@@ -4,9 +4,15 @@ import { useContext } from "react";
 import AppContext from "./AppContext";
 
 function RecipeTileLarge() {
-  const { currentRecipe } = useContext(AppContext);
+  const { currentRecipe, setFavorites, favorites } = useContext(AppContext);
 
-  if (currentRecipe === null) {
+  const addFavorite = (item) => {
+    
+    favorites.includes(item) ? null : setFavorites([...favorites, item]);
+    
+  };
+
+  if (!currentRecipe) {
     return (
       <div>
         <Link href="../page.js">
@@ -23,11 +29,12 @@ function RecipeTileLarge() {
             <h2 className="my-5 text-lg p-1 bg-red-300 m-2 rounded font-mono text-center">
               {currentRecipe.recipe.label}
             </h2>
+            <button onClick={() => addFavorite(currentRecipe)} className="my-5 text-lg p-1 bg-red-300 m-2 rounded font-mono text-center hover:bg-red-400 hover:text-white">Favorite</button>
           </div>
           <div className="flex flex-col items-center justify-center gap-3 mb-5 mx-5 xl:flex-row xl:justify-evenly xl:items-start">
             <img
               className="rounded h-80 w-80 xl:w-auto h-auto"
-              src={currentRecipe.recipe.images.LARGE.url}
+              src={currentRecipe.recipe.images.LARGE.url ? currentRecipe.recipe.images.LARGE.url : currentRecipe.recipe.images.REGULAR.url}
               alt={currentRecipe.recipe.label}
             />
             <div className=" text-center">

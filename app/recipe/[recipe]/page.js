@@ -1,8 +1,8 @@
 'use client'
 import React from 'react'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
-import RecipeTileLarge from '../components/RecipeTileLarge'
+import Header from '../../components/Header'
+import Footer from '../../components/Footer'
+import RecipeTileLarge from '../../components/RecipeTileLarge'
 
 
 function RecipePage() {

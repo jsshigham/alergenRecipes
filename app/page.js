@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import axios from "axios";
 import { useEffect, useContext } from "react";
 import SearchTiles from "./components/SearchTiles";
@@ -9,6 +9,8 @@ import AppContext from "./components/AppContext";
 
 export default function HomePage() {
   const {
+    favorites,
+    setFavorites,
     recipes,
     setRecipes,
     searchValue,
@@ -21,7 +23,6 @@ export default function HomePage() {
 
   const key = process.env.NEXT_PUBLIC_APP_KEY;
   const id = process.env.NEXT_PUBLIC_APP_ID;
-  
 
   const handleKeyDown = (event) => {
     if (event.keyCode === 13) {
@@ -44,6 +45,17 @@ export default function HomePage() {
     }
     getRecipes();
   }, [searchValueFromButtonClick]);
+
+  useEffect(() => {
+    const storedFavorites = localStorage.getItem('favorites');
+    if (storedFavorites) {
+      setFavorites(JSON.parse(storedFavorites));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+  }, [favorites]);
 
   const filteredRecipes = recipes.filter((recipe) => {
     const recipeLabels = recipe.recipe.healthLabels;
@@ -71,33 +83,18 @@ export default function HomePage() {
     return true;
   });
 
-  if (recipes.length === 0) {
-    return (
-      <main className="bg-white">
-        <Header />
-        <SearchForm
-          searchValue={searchValue}
-          setSearchValue={setSearchValue}
-          handleSearch={handleSearch}
-          setOptions={setOptions}
-          options={options}
-          handleKeyDown={handleKeyDown}
-        />
-        <Footer />
-      </main>
-    );
-  } else {
-    return (
-      <main className="bg-white">
-        <Header />
-        <SearchForm handleSearch={handleSearch} handleKeyDown={handleKeyDown} />
+  return (
+    <main className="bg-white">
+      <Header />
+      <SearchForm handleSearch={handleSearch} handleKeyDown={handleKeyDown} />
+      {recipes.length === 0 ? null : (
         <div className="grid lg:grid-cols-3 gap-5 p-5 md:grid-cols-2 sm:grid-cols-1">
           {filteredRecipes.map((recipe, index) => (
             <SearchTiles key={index} recipe={recipe} />
           ))}
         </div>
-        <Footer />
-      </main>
-    );
-  }
+      )}
+      <Footer />
+    </main>
+  );
 }
