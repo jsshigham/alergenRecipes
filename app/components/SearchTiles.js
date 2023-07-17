@@ -9,7 +9,7 @@ function SearchTiles({ recipe }) {
   function updateCurrentRecipe() {
     setCurrentRecipe(recipe);
   }
-  
+
   return (
     <div className="bg-red-950 text-white rounded flex flex-col items-center justify-start pb-2 hover:bg-red-400 hover:text-black">
       <h2 className="py-2 font-mono">{recipe.recipe.label}</h2>
