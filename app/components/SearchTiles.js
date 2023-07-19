@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { useContext } from "react";
-import AppContext from "./AppContext";
+import AppContext from "../context/AppContext";
 
 function SearchTiles({ recipe }) {
   const { setCurrentRecipe } = useContext(AppContext);

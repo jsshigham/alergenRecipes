@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { useContext } from "react";
-import AppContext from "./AppContext";
+import AppContext from "../context/AppContext";
 
 function Favorites() {
   const { setCurrentRecipe, setFavorites, favorites } = useContext(AppContext);
@@ -12,7 +12,8 @@ function Favorites() {
 
   const removeFavorite = (item) => {
     const updatedFavorites = favorites.filter((favorite) => favorite !== item);
-    setFavorites(updatedFavorites);
+    setFavorites(updatedFavorites)
+    localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
   };
 
   return (
@@ -21,7 +22,7 @@ function Favorites() {
         return (
           <div
             key={index}
-            className="bg-red-950 text-white rounded flex flex-col items-center justify-start pb-2 hover:bg-red-400 hover:text-black"
+            className="bg-red-950 gap-3 text-white rounded flex flex-col items-center justify-start pb-2 hover:bg-red-400 hover:text-black"
           >
             <h2 className="py-2 font-mono">{recipe.recipe.label}</h2>
             <img
@@ -46,7 +47,7 @@ function Favorites() {
                       >
                         {label}
                       </p>
-                    );
+                    )
                   default:
                     return null;
                 }
@@ -69,7 +70,7 @@ function Favorites() {
           </div>
         );
       })}
-      ;
+      
     </div>
   );
 }

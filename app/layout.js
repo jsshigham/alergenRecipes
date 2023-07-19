@@ -1,6 +1,6 @@
 'use client';
 import { useState, createContext } from "react";
-import AppContext from "./components/AppContext";
+import AppContext from "./context/AppContext";
 import './globals.css'
 import { Inter } from 'next/font/google'
 

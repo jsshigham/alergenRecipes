@@ -5,7 +5,7 @@ import SearchTiles from "./components/SearchTiles";
 import SearchForm from "./components/SearchForm";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import AppContext from "./components/AppContext";
+import AppContext from "./context/AppContext";
 
 export default function HomePage() {
   const {
@@ -41,21 +41,20 @@ export default function HomePage() {
         `https://api.edamam.com/api/recipes/v2?q=${searchValueFromButtonClick}&app_key=${key}&app_id=${id}&type=any`
       );
       setRecipes(recipes.data.hits);
-      console.log(recipes.data.hits);
     }
     getRecipes();
   }, [searchValueFromButtonClick]);
 
   useEffect(() => {
+    
     const storedFavorites = localStorage.getItem('favorites');
+    console.log('looking for items', storedFavorites)
     if (storedFavorites) {
       setFavorites(JSON.parse(storedFavorites));
     }
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem('favorites', JSON.stringify(favorites));
-  }, [favorites]);
+  
 
   const filteredRecipes = recipes.filter((recipe) => {
     const recipeLabels = recipe.recipe.healthLabels;

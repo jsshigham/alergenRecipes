@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import AppContext from "./AppContext";
+import AppContext from "../context/AppContext";
 
 const SearchForm = ({
   handleSearch,
@@ -18,7 +18,7 @@ const SearchForm = ({
 
   return (
     <div className="bg-red-300 flex flex-col gap-2 justify-center items-center py-5">
-      <p className="mx-2">
+      <p className="mx-2 text-center">
         Search for a food, specific or general, then tailor the options to meet
         your dietary requirements.
       </p>
