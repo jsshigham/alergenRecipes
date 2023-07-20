@@ -7,7 +7,7 @@ function Header() {
       <div className=" bg-red-950 flex justify-between  p-5">
         <Link href="../">
           <h1 className=" text-white font-mono font-bold p-2">
-            Alergen Recipes
+            Allergen Recipes
           </h1>
         </Link>
         <Link
