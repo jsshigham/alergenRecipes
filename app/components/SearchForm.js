@@ -5,94 +5,31 @@ const SearchForm = ({
   handleSearch,
   handleKeyDown,
 }) => {
-  const { searchValue, setSearchValue, setOptions, options } =
+  const { searchValue, setSearchValue, } =
     useContext(AppContext);
 
-  const handleCheckboxChange = (e) => {
-    const { name, checked } = e.target;
-    setOptions((prevOptions) => ({
-      ...prevOptions,
-      [name]: checked,
-    }));
-  };
+  
 
   return (
-    <div className="bg-red-300 flex flex-col gap-2 justify-center items-center py-5">
-      <p className="mx-2 text-center">
-        Search for a food, specific or general, then tailor the options to meet
-        your dietary requirements.
-      </p>
+    <div className=" flex flex-col justify-center items-center pt-10 col-span-8 border-b-2 border-slate-100">
       <form
-        action=""
-        className="flex flex-col rounded gap-2 items-center justify-center py-5 mx-2"
+        className="flex flex-col rounded gap-5 items-center justify-center py-5 mx-2"
       >
         <input
-          className="rounded px-2 w-48 text-center"
+          className="rounded bg-slate-150 shadow px-2 w-48 text-center"
           type="text"
           value={searchValue}
-          placeholder="Search"
+          placeholder="Type a recipe or food"
           onChange={(e) => setSearchValue(e.target.value)}
           onKeyDown={handleKeyDown}
         />
-        <div className="flex flex-wrap items-center justify-center gap-2">
-          <label className="inline-flex items-center">
-            <input
-              type="checkbox"
-              name="Dairy-Free"
-              checked={options["Dairy-Free"]}
-              onChange={handleCheckboxChange}
-              className="form-checkbox text-blue-500 focus:outline-none"
-            />
-            <span className="ml-2">Dairy-Free</span>
-          </label>
-          <label className="inline-flex items-center">
-            <input
-              type="checkbox"
-              name="Gluten-Free"
-              checked={options["Gluten-Free"]}
-              onChange={handleCheckboxChange}
-              className="form-checkbox text-blue-500 focus:outline-none"
-            />
-            <span className="ml-2">Gluten-Free</span>
-          </label>
-
-          <label className="inline-flex items-center">
-            <input
-              type="checkbox"
-              name="Peanut-Free"
-              checked={options["Peanut-Free"]}
-              onChange={handleCheckboxChange}
-              className="form-checkbox text-blue-500 focus:outline-none"
-            />
-            <span className="ml-2">Peanut-Free</span>
-          </label>
-          <label className="inline-flex items-center">
-            <input
-              type="checkbox"
-              name="Vegan"
-              checked={options["Vegan"]}
-              onChange={handleCheckboxChange}
-              className="form-checkbox text-blue-500 focus:outline-none"
-            />
-            <span className="ml-2">Vegan</span>
-          </label>
-          <label className="inline-flex items-center">
-            <input
-              type="checkbox"
-              name="Vegetarian"
-              checked={options["Vegetarian"]}
-              onChange={handleCheckboxChange}
-              className="form-checkbox text-blue-500 focus:outline-none"
-            />
-            <span className="ml-2">Vegetarian</span>
-          </label>
-        </div>
+        
         <button
           type="button"
-          className="bg-red-950 text-white rounded px-2 font-mono w-min hover:bg-red-400 hover:text-black"
+          className=" text-black shadow rounded px-2  hover:text-green-400"
           onClick={handleSearch}
         >
-          Search
+          Search Recipe
         </button>
       </form>
     </div>

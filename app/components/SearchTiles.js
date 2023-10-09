@@ -11,16 +11,16 @@ function SearchTiles({ recipe }) {
   }
 
   return (
-    <div className="bg-red-950 text-white rounded flex flex-col items-center justify-start pb-2 hover:bg-red-400 hover:text-black">
-      <h2 className="py-2 font-mono">{recipe.recipe.label}</h2>
+    <div className=" shadow  rounded flex flex-col items-center justify-start gap-2 pb-2   hover:bg-slate-50">
+      <h2 className="py-2  ">{recipe.recipe.label}</h2>
       <img
-        className="rounded"
+        className="rounded-sm"
         src={recipe.recipe.images.SMALL.url}
         alt={recipe.recipe.label}
       />
 
-      <p>Health Labels:</p>
-      <div className="flex flex-wrap justify-center items-center gap-2">
+      <p >Health Labels:</p>
+      <div className="flex flex-wrap justify-center items-center">
         {recipe.recipe.healthLabels.map((label, index) => {
           switch (label) {
             case "Gluten-Free":
@@ -30,7 +30,7 @@ function SearchTiles({ recipe }) {
             case "Vegetarian":
               return (
                 <p
-                  className="text-white bg-red-300 m-2 rounded font-mono p-1 text-center"
+                  className="shadow-sm text-slate-500  m-2 rounded-sm  p-1 text-center text-sm"
                   key={index}
                 >
                   {label}
@@ -44,7 +44,7 @@ function SearchTiles({ recipe }) {
       <button onClick={updateCurrentRecipe}>
         <Link
           href={`../recipe/${recipe.recipe.label.replaceAll(" ", "-")}`}
-          className="bg-white text-red-950 rounded font-mono p-1 text-center hover:bg-red-950 hover:text-white"
+          className=" shadow rounded  p-1 text-center hover:text-green-400"
         >
           More Information
         </Link>

@@ -1,15 +1,12 @@
-'use client';
+"use client";
 import { useState, createContext } from "react";
 import AppContext from "./context/AppContext";
-import './globals.css'
-import { Inter } from 'next/font/google'
+import "./globals.css";
+import { Inter } from "next/font/google";
 
-const inter = Inter({ subsets: ['latin'] })
-
-
+const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({ children }) {
-  
   const [favorites, setFavorites] = useState([]);
   const [recipes, setRecipes] = useState([]);
   const [currentRecipe, setCurrentRecipe] = useState({});
@@ -23,7 +20,7 @@ export default function RootLayout({ children }) {
     Vegan: false,
     Vegetarian: false,
   });
-  
+
   return (
     <AppContext.Provider
       value={{
@@ -41,9 +38,11 @@ export default function RootLayout({ children }) {
         setOptions,
       }}
     >
-    <html lang="en">
-      <body className={`${inter.className} bg-white font-mono`}>{children}</body>
-    </html>
-   </AppContext.Provider>
-  )
+      <html lang="en">
+        <body className={`${inter.className} bg-white font-mono`}>
+          {children}
+        </body>
+      </html>
+    </AppContext.Provider>
+  );
 }

@@ -8,7 +8,7 @@ function RecipeTileLarge() {
 
   const addFavorite = (item) => {
     const foundMatch = favorites.find(
-      (i) => i.recipe.label === item.recipe.label
+      (itemSearch) => itemSearch.recipe.label === item.recipe.label
     );
     if (!foundMatch) {
       const updatedFavorites = [...favorites, item];
@@ -17,71 +17,81 @@ function RecipeTileLarge() {
     }
   };
 
+  const removeFavorite = (item) => {
+    const updatedFavorites = favorites.filter((favorite) => favorite !== item);
+    setFavorites(updatedFavorites)
+    localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+  };
+
   return (
-    <>
-      <div className="bg-red-950 rounded flex flex-col items-center justify-start pb-2 mx-10 my-10">
-        <div className="flex flex-row">
-          <h2 className="my-5 text-lg p-1 bg-red-300 m-2 rounded font-mono text-center">
-            {currentRecipe.recipe.label}
-          </h2>
-          <button
-            onClick={() => addFavorite(currentRecipe)}
-            className="my-5 text-lg p-1 bg-red-300 m-2 rounded font-mono text-center hover:bg-red-400 hover:text-white"
-          >
-            Favorite
-          </button>
-        </div>
-        <div className="flex flex-col items-center justify-center gap-3 mb-5 mx-5 xl:flex-row xl:justify-evenly xl:items-start">
-          <img
-            className="rounded h-80 w-80 xl:w-auto h-auto"
-            src={
-              currentRecipe.recipe.images.LARGE.url
-                ? currentRecipe.recipe.images.LARGE.url
-                : currentRecipe.recipe.images.REGULAR.url
-            }
-            alt={currentRecipe.recipe.label}
-          />
-          <div className=" text-center">
-            <h2 className=" bg-red-400 m-2 rounded font-mono p-1 text-center ">
-              Ingredients:
-            </h2>
-            <ul>
-              {currentRecipe.recipe.ingredientLines.map((ingredient, index) => {
-                return (
-                  <li
-                    className=" bg-red-300 text-black m-2 rounded font-mono p-1 text-center"
-                    key={index}
-                  >
-                    {ingredient}
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        </div>
-        <div className="text-center">
-          <p className="my-4 text-black bg-red-400 m-2 rounded font-mono p-1 text-center">
-            Health Labels:
-          </p>
-          <div className=" flex flex-wrap justify-center items-center gap-2 pb-5">
-            {currentRecipe.recipe.healthLabels.map((label, index) => (
-              <p
-                className="bg-red-300 m-2 rounded font-mono p-1 text-center"
-                key={index}
-              >
-                {label}
-              </p>
-            ))}
-          </div>
-          <Link
-            className=" bg-red-400 m-2 rounded font-mono p-1 text-center hover:bg-red-950 hover:text-white"
-            href={currentRecipe.recipe.url}
-          >
-            Full Recipe Here
-          </Link>
+    <div className=" shadow-lg border border-slate-100 rounded flex flex-col items-center justify-start pb-2 mx-10 my-10">
+      <h2 className="my-5 text-lg p-1 m-2 rounded  text-center">
+        {currentRecipe.recipe.label}
+      </h2>
+
+      <div className="flex flex-col items-center justify-center gap-3 mb-5 mx-5 lg:flex-row lg:justify-center lg:items-">
+        <img
+          className="rounded h-80 w-80 xl:w-auto h-auto"
+          src={
+            currentRecipe.recipe.images.REGULAR.url
+              ? currentRecipe.recipe.images.REGULAR.url
+              : currentRecipe.recipe.images.SMALL.url
+          }
+          alt={currentRecipe.recipe.label}
+        />
+        <div className=" text-center shadow">
+          <h2 className="  m-2 rounded p-1 text-center ">Ingredients:</h2>
+          <ul>
+            {currentRecipe.recipe.ingredientLines.map((ingredient, index) => {
+              return (
+                <li
+                  className=" text-sm text-black m-2 rounded  p-1 text-center"
+                  key={index}
+                >
+                  {ingredient}
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </div>
-    </>
+      <div className="text-center">
+        <p>Health Labels:</p>
+        <div className=" grid  grid-cols-3 lg:grid-cols-7 justify-center items-center gap-2 pb-5">
+          {currentRecipe.recipe.healthLabels.map((label, index) => (
+            <p
+              className=" shadow-sm text-slate-500  m-2 rounded-sm  p-1 text-center text-sm"
+              key={index}
+            >
+              {label}
+            </p>
+          ))}
+        </div>
+
+        <Link
+          className="  p-1  m-2 rounded shadow text-center hover:text-green-400"
+          target="_blank"
+          href={currentRecipe.recipe.url}
+        >
+          Full Recipe
+        </Link>
+        {favorites.find(
+          (itemSearch) => itemSearch.recipe.label === currentRecipe.recipe.label
+        ) ? (
+          <button
+            onClick={() => removeFavorite(currentRecipe)}
+            className="  p-1  m-2 rounded shadow text-center hover:text-red-500"
+          >
+            Remove from Favorites
+          </button>
+        ) : <button
+            onClick={() => addFavorite(currentRecipe)}
+            className="  p-1  m-2 rounded shadow text-center hover:text-green-400"
+          >
+            Add to Favorites
+          </button>}
+      </div>
+    </div>
   );
 }
 

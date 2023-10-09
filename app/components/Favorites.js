@@ -2,9 +2,36 @@ import React from "react";
 import Link from "next/link";
 import { useContext } from "react";
 import AppContext from "../context/AppContext";
+import Filter from "./Filter";
 
 function Favorites() {
-  const { setCurrentRecipe, setFavorites, favorites } = useContext(AppContext);
+  const { setCurrentRecipe, setFavorites, favorites, options } = useContext(AppContext);
+
+  const filteredFavorites = favorites.filter((recipe) => {
+    const recipeLabels = recipe.recipe.healthLabels;
+    const {
+      "Dairy-Free": dairyFree,
+      "Gluten-Free": glutenFree,
+      "Peanut-Free": peanutFree,
+      Vegan,
+      Vegetarian,
+    } = options;
+
+    if (!dairyFree && !glutenFree && !peanutFree && !Vegan && !Vegetarian) {
+      return true;
+    }
+
+    if (
+      (dairyFree && !recipeLabels.includes("Dairy-Free")) ||
+      (glutenFree && !recipeLabels.includes("Gluten-Free")) ||
+      (peanutFree && !recipeLabels.includes("Peanut-Free")) ||
+      (Vegan && !recipeLabels.includes("Vegan")) ||
+      (Vegetarian && !recipeLabels.includes("Vegetarian"))
+    ) {
+      return false;
+    }
+    return true;
+  });
 
   function updateCurrentRecipe() {
     setCurrentRecipe(recipe);
@@ -17,16 +44,19 @@ function Favorites() {
   };
 
   return (
-    <div className="grid lg:grid-cols-3 gap-5 p-5 md:grid-cols-2 sm:grid-cols-1">
-      {favorites.map((recipe, index) => {
+    <div className=" md:grid md:grid-cols-8 md:grid-flow-row md:gap-x-4 justify-center items-center md:justify-start md:items-start flex flex-col ">
+    <Filter/>
+    <div className="flex items-center justify-center md:col-span-6 lg:col-span-7">
+    <div className="flex flex-col justify-center items-center md:grid lg:grid-cols-3 gap-5 p-5 md:grid-cols-2 sm:grid-cols-1">
+      {filteredFavorites.map((recipe, index) => {
         return (
           <div
             key={index}
-            className="bg-red-950 gap-3 text-white rounded flex flex-col items-center justify-start pb-2 hover:bg-red-400 hover:text-black"
+            className=" shadow  rounded flex flex-col items-center justify-start gap-2 pb-2   hover:bg-slate-50"
           >
-            <h2 className="py-2 font-mono">{recipe.recipe.label}</h2>
+            <h2 className="py-2">{recipe.recipe.label}</h2>
             <img
-              className="rounded"
+              className="rounded-sm"
               src={recipe.recipe.images.SMALL.url}
               alt={recipe.recipe.label}
             />
@@ -42,7 +72,7 @@ function Favorites() {
                   case "Vegetarian":
                     return (
                       <p
-                        className="text-white bg-red-300 m-2 rounded font-mono p-1 text-center"
+                        className="shadow-sm text-slate-500  m-2 rounded-sm  p-1 text-center text-sm"
                         key={index}
                       >
                         {label}
@@ -56,13 +86,13 @@ function Favorites() {
             <button onClick={updateCurrentRecipe}>
               <Link
                 href={`../recipe/${recipe.recipe.label.replaceAll(" ", "-")}`}
-                className="bg-white text-red-950 rounded font-mono p-1 text-center hover:bg-red-950 hover:text-white pb-2"
+                className="shadow rounded  p-1 text-center hover:text-green-400"
               >
                 More Information
               </Link>
             </button>
             <button
-              className="bg-white text-red-950 rounded font-mono p-1 text-center hover:bg-red-950 hover:text-white"
+              className="shadow rounded  p-1 text-center hover:text-green-400"
               onClick={() => removeFavorite(recipe)}
             >
               Unfavorite
@@ -71,6 +101,8 @@ function Favorites() {
         );
       })}
       
+    </div>
+    </div>
     </div>
   );
 }

@@ -4,7 +4,9 @@ import { useEffect, useContext } from "react";
 import SearchTiles from "./components/SearchTiles";
 import SearchForm from "./components/SearchForm";
 import Header from "./components/Header";
-import Footer from "./components/Footer";
+import SearchResults from "./components/SearchResults";
+import Filter from "./components/Filter";
+
 import AppContext from "./context/AppContext";
 
 export default function HomePage() {
@@ -42,58 +44,35 @@ export default function HomePage() {
       );
       setRecipes(recipes.data.hits);
     }
-    getRecipes();
+    getRecipes()
+    
   }, [searchValueFromButtonClick]);
 
   useEffect(() => {
-    
-    const storedFavorites = localStorage.getItem('favorites');
-    console.log('looking for items', storedFavorites)
+    const storedFavorites = localStorage.getItem("favorites");
+    console.log("looking for items", storedFavorites);
     if (storedFavorites) {
       setFavorites(JSON.parse(storedFavorites));
     }
   }, []);
 
-  
-
-  const filteredRecipes = recipes.filter((recipe) => {
-    const recipeLabels = recipe.recipe.healthLabels;
-    const {
-      "Dairy-Free": dairyFree,
-      "Gluten-Free": glutenFree,
-      "Peanut-Free": peanutFree,
-      Vegan,
-      Vegetarian,
-    } = options;
-
-    if (!dairyFree && !glutenFree && !peanutFree && !Vegan && !Vegetarian) {
-      return true;
-    }
-
-    if (
-      (dairyFree && !recipeLabels.includes("Dairy-Free")) ||
-      (glutenFree && !recipeLabels.includes("Gluten-Free")) ||
-      (peanutFree && !recipeLabels.includes("Peanut-Free")) ||
-      (Vegan && !recipeLabels.includes("Vegan")) ||
-      (Vegetarian && !recipeLabels.includes("Vegetarian"))
-    ) {
-      return false;
-    }
-    return true;
-  });
-
   return (
-    <main className="bg-white">
+    <main className="bg-white min-h-screen flex flex-col">
       <Header />
-      <SearchForm handleSearch={handleSearch} handleKeyDown={handleKeyDown} />
-      {recipes.length === 0 ? null : (
-        <div className="grid lg:grid-cols-3 gap-5 p-5 md:grid-cols-2 sm:grid-cols-1">
-          {filteredRecipes.map((recipe, index) => (
-            <SearchTiles key={index} recipe={recipe} />
-          ))}
+      {recipes.length === 0 ? (
+        <SearchForm handleSearch={handleSearch} handleKeyDown={handleKeyDown} />
+      ) : (
+        <div className=" md:grid md:grid-cols-8 md:grid-flow-row md:gap-x-4 justify-center items-center flex flex-col">
+          
+          <SearchForm
+            handleSearch={handleSearch}
+            handleKeyDown={handleKeyDown}
+          />
+          <Filter />
+          
+          <SearchResults />
         </div>
       )}
-      <Footer />
     </main>
   );
 }
