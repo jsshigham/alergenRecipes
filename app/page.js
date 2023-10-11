@@ -2,7 +2,7 @@
 import axios from "axios";
 import { useEffect, useContext } from "react";
 import SearchTiles from "./components/SearchTiles";
-import SearchForm from "./components/SearchForm";
+import SearchForm from "./components/SearchForm/SearchForm";
 import Header from "./components/Header";
 import SearchResults from "./components/SearchResults";
 import Filter from "./components/Filter";

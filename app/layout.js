@@ -20,6 +20,8 @@ export default function RootLayout({ children }) {
     Vegan: false,
     Vegetarian: false,
   });
+  const [suggestions, setSuggestions] = useState([]);
+
 
   return (
     <AppContext.Provider
@@ -36,6 +38,8 @@ export default function RootLayout({ children }) {
         setSearchValueFromButtonClick,
         options,
         setOptions,
+        suggestions,
+        setSuggestions
       }}
     >
       <html lang="en">
