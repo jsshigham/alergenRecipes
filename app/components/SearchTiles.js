@@ -11,8 +11,8 @@ function SearchTiles({ recipe }) {
   }
 
   return (
-    <div className=" shadow  rounded flex flex-col items-center justify-start gap-2 pb-2   hover:bg-slate-50">
-      <h2 className="py-2  ">{recipe.recipe.label}</h2>
+    <div className=" shadow  rounded flex flex-col items-center justify-start gap-2 pb-2 hover:bg-slate-50">
+      <h2 className="py-2 text-center ">{recipe.recipe.label}</h2>
       <img
         className="rounded-sm"
         src={recipe.recipe.images.SMALL.url}

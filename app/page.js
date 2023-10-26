@@ -56,13 +56,18 @@ export default function HomePage() {
     }
   }, []);
 
+  useEffect(() => {
+   const innerHeight = window.innerHeight;
+
+  })
+
   return (
     <main className="bg-white min-h-screen flex flex-col">
       <Header />
       {recipes.length === 0 ? (
         <SearchForm handleSearch={handleSearch} handleKeyDown={handleKeyDown} />
       ) : (
-        <div className=" md:grid md:grid-cols-8 md:grid-flow-row md:gap-x-4 justify-center items-center flex flex-col">
+        <div className=" md:grid md:grid-cols-8 md:grid-flow-row md:gap-x-4 justify-center items-start flex flex-col">
           
           <SearchForm
             handleSearch={handleSearch}

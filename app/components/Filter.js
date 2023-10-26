@@ -24,7 +24,7 @@ function Filter() {
   };
 
   return (
-    <div className="flex justify-center  items-start border-b-2 md:border-r-2 border-slate-100 h-full p-5 md:col-span-2 lg:col-span-1 pt-10 md:min-h-screen">
+    <div className="flex justify-center sticky items-start  md:border-r-2 border-slate-100 h-full p-5 md:col-span-2 lg:col-span-1 pt-10 md:min-h-screen">
       <div className="flex md:flex-col items-start justify-start gap-5">
         {filters.map((filter) => (
           <label key={filter}>

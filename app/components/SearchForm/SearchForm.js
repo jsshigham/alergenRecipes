@@ -23,7 +23,7 @@ const SearchForm = ({ handleSearch, handleKeyDown }) => {
 
   return (
     <div className=" flex flex-col justify-center items-center pt-10 col-span-8 border-b-2 border-slate-100 py-5">
-      <form className=" flex h-16 w-2/3 rounded gap-5 items-start justify-center py-5 mx-2">
+      <form onKeyDown={handleKeyDown} className=" flex h-16 w-2/3 rounded gap-5 items-start justify-center py-5 mx-2">
         <Autosuggest
           suggestions={suggestions}
           onSuggestionsFetchRequested={({ value }) => {
@@ -50,12 +50,14 @@ const SearchForm = ({ handleSearch, handleKeyDown }) => {
           onSuggestionSelected={(e, { suggestion }) => {
             setSearchValue(suggestion);
           }}
+          
         />
 
         <button
           type="button"
           className=" text-black shadow rounded px-2 hover:text-green-400 "
           onClick={handleSearch}
+          
         >
           Search Recipe
         </button>

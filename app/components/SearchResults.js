@@ -35,7 +35,7 @@ function SearchResults() {
   return (
     <div className="flex items-center justify-center md:col-span-6 lg:col-span-7">
     
-      <div className="grid lg:grid-cols-3 gap-5 p-5 md:grid-cols-2 sm:grid-cols-1 ">
+      <div className="grid lg:grid-cols-3 gap-5 pt-3 md:grid-cols-2 sm:grid-cols-1 w-full ">
         {filteredRecipes.map((recipe, index) => (
           <SearchTiles key={index} recipe={recipe} />
         ))}

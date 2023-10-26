@@ -31,7 +31,7 @@ function RecipeTileLarge() {
 
       <div className="flex flex-col items-center justify-center gap-3 mb-5 mx-5 lg:flex-row lg:justify-center lg:items-">
         <img
-          className="rounded h-80 w-80 xl:w-auto h-auto"
+          className="rounded h-80 w-80 xl:w-auto "
           src={
             currentRecipe.recipe.images.REGULAR.url
               ? currentRecipe.recipe.images.REGULAR.url
